@@ -1,3 +1,7 @@
+KoreanSubtitlesParser/*/copy/
+KoreanSubtitlesParser/*/csv/
+KoreanSubtitlesParser/*/origin/
+
 # Crawler excel file ouput
 JobList2.xlsx
 
