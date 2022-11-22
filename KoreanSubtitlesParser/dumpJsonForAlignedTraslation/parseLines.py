@@ -8,8 +8,8 @@ GENERAL_OPEN_TAG_PATTERN = r'<.*?><c.*?>'
 GENERAL_CLOSE_TAG_PATTERN = r'<\/.*?><\/c.*?>'
 
 ''' OUTPUT
-{'00:58:57.416': ['- 아니, 얘가 좀 끓여야지', '- 아니야, 그렇지 않아'],
- '00:58:59.708': ['(석원) 음, 약속했다']}
+{'00:58:57.416': ['-他自己做不是更好嗎？', '-沒關係'],
+ '00:58:59.708': []}
 '''
 
 ''' FROM below file format
@@ -17,9 +17,11 @@ GENERAL_CLOSE_TAG_PATTERN = r'<\/.*?><\/c.*?>'
 00:58:57.416 --> 00:58:59.625 position:50.00%,middle align:middle size:80.00% line:79.33% 
 <c.korean><c.bg_transparent>&lrm;- 아니, 얘가 좀 끓여야지</c.bg_transparent></c.korean>
 <c.korean><c.bg_transparent>&lrm;- 아니야, 그렇지 않아</c.bg_transparent></c.korean>
+<c.traditionalchinese><c.bg_transparent>&lrm;-他自己做不是更好嗎？</c.bg_transparent></c.traditionalchinese>
+<c.traditionalchinese><c.bg_transparent>&lrm;-沒關係</c.bg_transparent></c.traditionalchinese>
 
 1217
-00:58:59.708 --> 00:59:02.541 position:50.00%,middle align:middle size:80.00% line:84.67% 
+00:58:59.708 --> 00:59:02.541 position:50.00%,middle align:middle size:80.00% line:84.67%
 <c.korean><c.bg_transparent>&lrm;(석원) 음, 약속했다</c.bg_transparent></c.korean>
 '''
 
@@ -37,9 +39,17 @@ def file2DictKoOnly(fileCopy):
     for i in range(len(start_times)):
         key = start_times[i]
         subtitlesKo = []
+        subtitlesTranslated = [] 
         for subtitle in subtitles[i]:
-            subtitle = re.sub(KR_OPEN_TAG_PATTERN, '', subtitle)
-            trimmed = re.sub(KR_CLOSE_TAG_PATTERN, '', subtitle)
-            subtitlesKo.append(trimmed)
-        linesDict[key] = subtitlesKo
+            koLine = re.match(KR_OPEN_TAG_PATTERN, subtitle)
+            translateLine = re.match(GENERAL_OPEN_TAG_PATTERN, subtitle)
+            if(koLine):
+                trimmed = re.sub(KR_OPEN_TAG_PATTERN, '', subtitle)
+                trimmed = re.sub(KR_CLOSE_TAG_PATTERN, '', trimmed)
+                subtitlesKo.append(trimmed)
+            elif(translateLine):
+                trimmed = re.sub(GENERAL_OPEN_TAG_PATTERN, '', subtitle)
+                trimmed = re.sub(GENERAL_CLOSE_TAG_PATTERN, '', trimmed)
+                subtitlesTranslated.append(trimmed)
+        linesDict[key] = subtitlesTranslated
     return linesDict

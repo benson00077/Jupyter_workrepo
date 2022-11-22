@@ -18,7 +18,7 @@ def main():
 
         linesDict = file2DictKoOnly(filePaths['FILE_COPY'])
         (outputDir, outputFile) = dict2Json(filePaths['FILE_JSON'], linesDict)
-        print(f'{outputFile} created at {outputDir} for {SHOW} with pos')
+        print(f'{outputFile} created at {outputDir} for {SHOW} {TARGET_LAN} aligned to ko timestamp')
 
 if __name__ == '__main__':
     main()
