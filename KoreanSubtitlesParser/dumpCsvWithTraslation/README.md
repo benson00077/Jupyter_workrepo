@@ -1,16 +1,19 @@
 # Usage
+Dump both Korean and translation language into csv file, timestamp/id aligend w/ korean one.
 
-- Define constants at const.py
-- Create Directories
-  - ./origin
-  - ./origin/{SHOW}/
-- Define subtitles files
-  - ./origin/ko1.txt
-  - ./origin/{SHOW}/ko1_zh1.txt
+## Prerequisite
+- OS: windows
+- Directories deifned in `const.py`
+- Switch target translation language in `const.py`
 
-# TODO
-- [ ] update script into ipynb
-- [ ] update directory logic && .gitignore 
-  - [ ] csv && json dumper might use same origin subtitles file, need some opt
-- [ ] docs for each files, use notes from ipynb
-- [ ] time.time()
+## Input Files
+Please define below:
+- Merged subtitles at `../subtitles/{SHOW}/merged` in format `ko1_zh1.txt`
+
+## Output Files
+Dump at `../subtitles/csv`
+
+If you wanna import csv ot excel, follow below steps to prevent encoding issue:
+- open new excel
+- 資料 >> CSV（匯入）
+- select UTF-8

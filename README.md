@@ -1,2 +1,3 @@
-# Crawler-practice
-My web crawler practice workspace
+# Usage
+- Korean subtitles proccessing scirpts
+- My web crawler practice workspace

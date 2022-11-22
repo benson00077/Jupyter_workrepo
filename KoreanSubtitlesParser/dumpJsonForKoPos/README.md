@@ -4,10 +4,13 @@ Dump korean subtitles into json file with korean pos tags.
 ## Prerequisite
 - OS: windows
 - KoNLPy and Java
-- Directory, since we hav
+- Directories deifned in `const.py`
 
+## Input Files
+Please define below:
+- Korean subtitles at `../subtitles/{SHOW}/korean` in format `ko1.txt`
 
-## Output
+## Output Files
 path: `../subtitles/json`
 
 datas:
