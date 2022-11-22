@@ -13,3 +13,4 @@
 - [ ] update directory logic && .gitignore 
   - [ ] csv && json dumper might use same origin subtitles file, need some opt
 - [ ] docs for each files, use notes from ipynb
+- [ ] time.time()

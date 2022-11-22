@@ -20,9 +20,7 @@ def removeCaptionsLines(fileCopy: str, linesToRemove: int): # clean captions lin
 def getSubtitles(lines: list[str], timeStampPattern):
     '''
     subtitles = 
-    ["<c.korean><c.bg_transparent>&lrm;'어머님 생신'</c.bg_transparent></c.korean>",
-    '<c.traditionalchinese><c.bg_transparent>&lrm;-好</c.bg_transparent></c.traditionalchinese>',
-    '<c.traditionalchinese><c.bg_transparent>&lrm;-“媽媽的生日”</c.bg_transparent></c.traditionalchinese>']
+    [..., ["<c.korean><c.bg_transparent>&lrm;'어머님 생신'</c.bg_transparent></c.korean>"]]
     '''
     # Get lines in file
     subtitles = [[]] # the inner [] as indicator
@@ -51,3 +49,7 @@ def getStartTimes(lines: list[str], timeStampPattern):
     start_times = [time.split(' ')[0] for time in start_times]
     return start_times
 
+#TODO: consider discard all text within [], instead of just trimmed '[' or ']'
+def cleanSquareBreackets(string):
+    re_pattern = r'\]|\['
+    return re.sub(re_pattern, '', string)

@@ -8,20 +8,22 @@ GENERAL_OPEN_TAG_PATTERN = r'<.*?><c.*?>'
 GENERAL_CLOSE_TAG_PATTERN = r'<\/.*?><\/c.*?>'
 
 ''' OUTPUT
-'00:58:46.625': {'ko': ['아씨, 어떡하지? 가만있어 봐', '내가 이번 금요일 뭐 하냐?'],
-            'zh': ['我不確定我有沒有拍攝行程']},
-'00:58:48.750': {'ko': ['안 그러면 내가 끓여주면 되는데'], 'zh': ['如果沒有，我自己煮']},
+{'00:58:57.416': ['- 아니, 얘가 좀 끓여야지', '- 아니야, 그렇지 않아'],
+ '00:58:59.708': ['(석원) 음, 약속했다']}
 '''
 
 ''' FROM below file format
-1226
-00:59:27.666 --> 00:59:28.583 position:50.00%,middle align:middle size:80.00% line:84.67%
-<c.korean><c.bg_transparent>&lrm;'어머님 생신'</c.bg_transparent></c.korean>
-<c.traditionalchinese><c.bg_transparent>&lrm;-好</c.bg_transparent></c.traditionalchinese>
-<c.traditionalchinese><c.bg_transparent>&lrm;-“媽媽的生日”</c.bg_transparent></c.traditionalchinese>
+1216
+00:58:57.416 --> 00:58:59.625 position:50.00%,middle align:middle size:80.00% line:79.33% 
+<c.korean><c.bg_transparent>&lrm;- 아니, 얘가 좀 끓여야지</c.bg_transparent></c.korean>
+<c.korean><c.bg_transparent>&lrm;- 아니야, 그렇지 않아</c.bg_transparent></c.korean>
+
+1217
+00:58:59.708 --> 00:59:02.541 position:50.00%,middle align:middle size:80.00% line:84.67% 
+<c.korean><c.bg_transparent>&lrm;(석원) 음, 약속했다</c.bg_transparent></c.korean>
 '''
 
-def file2Dict(fileCopy, transltionLanguage):
+def file2DictKoOnly(fileCopy):
     with open(fileCopy, "r", encoding="UTF-8") as f:
         lines = f.readlines()
     subtitles = getSubtitles(lines, TIME_STAMP_PATTERN)
@@ -35,17 +37,9 @@ def file2Dict(fileCopy, transltionLanguage):
     for i in range(len(start_times)):
         key = start_times[i]
         subtitlesKo = []
-        subtitlesTranslated = [] 
         for subtitle in subtitles[i]:
-            koLine = re.match(KR_OPEN_TAG_PATTERN, subtitle)
-            translateLine = re.match(GENERAL_OPEN_TAG_PATTERN, subtitle)
-            if(koLine):
-                trimmed = re.sub(KR_OPEN_TAG_PATTERN, '', subtitle)
-                trimmed = re.sub(KR_CLOSE_TAG_PATTERN, '', trimmed)
-                subtitlesKo.append(trimmed)
-            elif(translateLine):
-                trimmed = re.sub(GENERAL_OPEN_TAG_PATTERN, '', subtitle)
-                trimmed = re.sub(GENERAL_CLOSE_TAG_PATTERN, '', trimmed)
-                subtitlesTranslated.append(trimmed)
-        linesDict[key] = {'ko': subtitlesKo, transltionLanguage: subtitlesTranslated}
+            subtitle = re.sub(KR_OPEN_TAG_PATTERN, '', subtitle)
+            trimmed = re.sub(KR_CLOSE_TAG_PATTERN, '', subtitle)
+            subtitlesKo.append(trimmed)
+        linesDict[key] = subtitlesKo
     return linesDict

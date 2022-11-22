@@ -18,9 +18,9 @@ def getDirectoryPaths():
     if not SHOW:
         raise RuntimeError('Must provide a SHOW name!')
     DIRS = {
-        'DIR_ORIGIN': pathMerged,
+        'DIR_ORIGIN': pathKorean,
         'DIR_COPY': pathCopy,
-        'DIR_CSV': pathCsv,
+        'FILE_JSON': pathJson,
     }
     return DIRS
 
@@ -28,8 +28,8 @@ def getFilePaths(i:int):
     if not SHOW:
         raise RuntimeError('Must provide a SHOW name!')
     FILES = {
-        'FILE_ORIGIN': pathMerged + f'\\ko{i}_{TARGET_LAN}{i}.txt',
-        'FILE_COPY': pathCopy + f'\\ko{i}_{TARGET_LAN}{i}_copy.txt',
-        'FILE_CSV': pathCsv + f'\\{SHOW}_{TARGET_LAN}_{i}.csv',
+        'FILE_ORIGIN': pathKorean + f'\\ko{i}.txt',
+        'FILE_COPY': pathCopy + f'\\ko{i}_copy.txt',
+        'FILE_JSON': pathJson + f'\\{SHOW}_ko_{i}.json',
     }
     return FILES
