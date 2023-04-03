@@ -3,6 +3,14 @@ A parent file for 3 modules processing korean subtitles and it's translation.
 
 Python 3.9.0 under 64 bit (AMD64) windows OS
 
+Run scripts as below order
+```bash
+# for ko pos
+$ python ./dumpJsonForKoPos/main.py
+# for translation>
+$ python ./dumpJsonForAlignedTraslation/main.py
+```
+
 # Roadmap
 - [x] update directory logic && .gitignore 
   - [x] csv && json dumper might use same origin subtitles file, need some opt

@@ -4,6 +4,7 @@ from helper import getSubtitles, getStartTimes
 TIME_STAMP_PATTERN = r'[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3} -->'
 KR_OPEN_TAG_PATTERN = r'<c.korean><.*?>'
 KR_CLOSE_TAG_PATTERN = r'<\/.*?><\/c.korean>'
+ZH_PATTERN = r'<c\.traditionalchinese>.*?</c\.traditionalchinese>'
 GENERAL_OPEN_TAG_PATTERN = r'<.*?><c.*?>'
 GENERAL_CLOSE_TAG_PATTERN = r'<\/.*?><\/c.*?>'
 
@@ -14,12 +15,14 @@ GENERAL_CLOSE_TAG_PATTERN = r'<\/.*?><\/c.*?>'
 
 ''' FROM below file format
 1216
-00:58:57.416 --> 00:58:59.625 position:50.00%,middle align:middle size:80.00% line:79.33% 
+00:58:57.416 --> 00:58:59.625 position:50.00%,middle align:middle size:80.00% line:79.33%
 <c.korean><c.bg_transparent>&lrm;- 아니, 얘가 좀 끓여야지</c.bg_transparent></c.korean>
 <c.korean><c.bg_transparent>&lrm;- 아니야, 그렇지 않아</c.bg_transparent></c.korean>
+<c.traditionalchinese><c.bg_transparent>&lrm;-他自己做不是更好嗎？</c.bg_transparent></c.traditionalchinese>
+<c.traditionalchinese><c.bg_transparent>&lrm;-沒關係</c.bg_transparent></c.traditionalchinese>
 
 1217
-00:58:59.708 --> 00:59:02.541 position:50.00%,middle align:middle size:80.00% line:84.67% 
+00:58:59.708 --> 00:59:02.541 position:50.00%,middle align:middle size:80.00% line:84.67%
 <c.korean><c.bg_transparent>&lrm;(석원) 음, 약속했다</c.bg_transparent></c.korean>
 '''
 
@@ -40,6 +43,7 @@ def file2DictKoOnly(fileCopy):
         for subtitle in subtitles[i]:
             subtitle = re.sub(KR_OPEN_TAG_PATTERN, '', subtitle)
             trimmed = re.sub(KR_CLOSE_TAG_PATTERN, '', subtitle)
-            subtitlesKo.append(trimmed)
+            zhRemoved = re.sub(ZH_PATTERN, '', trimmed)
+            subtitlesKo.append(zhRemoved)
         linesDict[key] = subtitlesKo
     return linesDict

@@ -8,7 +8,9 @@ Dump korean subtitles into json file with korean pos tags.
 
 ## Input Files
 Please define below:
-- Korean subtitles at `../subtitles/{SHOW}/korean` in format `ko1.txt`
+- ~~Korean subtitles at `../subtitles/{SHOW}/korean` in format `ko1.txt`~~
+- Merged subtitles at `../subtitles/{SHOW}/merged` in format `ko1_zh1.txt`
+  - Since we have to aligned the chunck ID, We are parsing POS of korean even with merged subtitles instead.
 
 ## Output Files
 path: `../subtitles/json`
