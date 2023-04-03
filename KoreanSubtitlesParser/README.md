@@ -3,12 +3,16 @@ A parent file for 3 modules processing korean subtitles and it's translation.
 
 Python 3.9.0 under 64 bit (AMD64) windows OS
 
+Node 14.17.0 
+
 Run scripts as below order
 ```bash
 # for ko pos
 $ python ./dumpJsonForKoPos/main.py
 # for translation>
 $ python ./dumpJsonForAlignedTraslation/main.py
+# for reshaping json, for my korean-learner-back repo
+$ node ./reshapeForKoreanLearnerBack.js
 ```
 
 # Roadmap
