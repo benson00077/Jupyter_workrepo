@@ -41,9 +41,11 @@ def file2DictKoOnly(fileCopy):
         key = start_times[i]
         subtitlesKo = []
         for subtitle in subtitles[i]:
+            koLine = re.match(KR_OPEN_TAG_PATTERN, subtitle)
+            if not koLine:
+                continue
             subtitle = re.sub(KR_OPEN_TAG_PATTERN, '', subtitle)
             trimmed = re.sub(KR_CLOSE_TAG_PATTERN, '', subtitle)
-            zhRemoved = re.sub(ZH_PATTERN, '', trimmed)
-            subtitlesKo.append(zhRemoved)
+            subtitlesKo.append(trimmed)
         linesDict[key] = subtitlesKo
     return linesDict
